@@ -6,18 +6,17 @@ We decided to create a simulation model to determine the probability of a person
 Factors which we looked into that can effect the probability of a customer leaving Lloyds bank eg. interest rates, unemployment rate in their age bracket, economic growth. If interest rates are high it means customers get a greater return on their savings so they may have more of an incentive to stay with Lloyds bank if they have alot of savings. From our research we saw that those in older age categories (50+) had a higher percentage of savings compared to younger age categories. As for unemployment rates if they are high in certain age groups it increases the probability that an individual in tha age category might be unemployed making them more likely to leave Lloyds bank as they aren't saving as much.
 
 
-# libraries used:
-tkinter
-matplotlib
-random
-numpy
-importlib
-pandas
-tensorflow
-tensorflow.keras 
-layers
-glob 
-matplotlib.pyplot 
+# Libraries used:
+matplotlib,
+random,
+numpy,
+importlib,
+pandas,
+tensorflow,
+tensorflow.keras, 
+layers,
+glob,
+matplotlib.pyplot,
 
 # References
 GUI: https://bolt.new
