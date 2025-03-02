@@ -11,7 +11,7 @@ filename = "client_data"
 client_data = importlib.import_module(filename)
 agent_dict = client_data.agent_dict
 
-age_offsets = [0, 1, 4, 5]  # Add +1, +4, +5 to the original age
+age_offsets = [1, 5, 10]  # Add +1, +4, +5 to the original age
 
 bank_interest_rate = 2.0
 competitor_interest_rate = 1.8
@@ -24,7 +24,7 @@ decision = [True, False]
 baseInflation = 2.12 
 counter = 0
 
-age = int(input("Please enter your age"))
+age = int(input("Please enter your age: "))
 
 inflation = baseInflation
 for i in range(age):
@@ -256,8 +256,7 @@ if age < 66:
         customer = {'age': current_age, 'income_after_tax': updated_income, 'years_with_bank': updated_years_in_bank, 'savings_account': updated_savings, 'current_account': updated_current_account, 'pension_account': updated_pension}
         number2 = predictability(model, scaler, bank_interest_rate, competitor_interest_rate, inflation_rate, employment_rate, customer)
         print(f"\nA customer of age {current_age}:")
-        print(" has the probability of ", number2 , "%")
-        print(f". Their pension will be {updated_pension}")
-        print(f" and their savings will be {updated_savings}")
-
+        print("The probablity of them leaving is ", number2 , "%.")
+        print(f"Their pension will be £ {updated_pension}.")
+        print(f"Their savings will be £{updated_savings}.")
 
