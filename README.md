@@ -17,6 +17,7 @@ tensorflow.keras,
 layers,
 glob,
 matplotlib.pyplot,
+streamlit
 
 # References
 GUI: Cursor.com. (2023). Cursor - The AI Code Editor. [online] Available at: https://www.cursor.com/en.
