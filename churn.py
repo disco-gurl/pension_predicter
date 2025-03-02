@@ -110,4 +110,76 @@ def probabality(age_group_lower, age_group_upper, bank_interest_rate, competitor
         layers.Dense(128, activation='relu'),
         layers.Dropout(0.2),
         layers.Dense(128, activation='relu'),
-        l
+        layers.Dropout(0.2),
+        layers.Dense(128, activation='relu'),
+        layers.Dropout(0.2),
+        layers.Dense(1, activation='sigmoid')
+    ])
+
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    model.fit(x_train, y_train, epochs=5, batch_size=32)
+    
+    return model, scaler
+
+# Select the age group and run simulations
+age_groups = [(16, 17, 85.95), (18, 21, 85.95), (22, 29, 96.05), 
+              (30, 39, 97.42), (40, 49, 97.42), (50, 59, 97.47), (60, 90, 97.47)]
+
+for lower, upper, emp_rate in age_groups:
+    if lower <= age <= upper:
+        employment_rate = emp_rate
+        simulation_data = simulations(lower, upper)
+        model, scaler = probabality(lower, upper, bank_interest_rate, competitor_interest_rate, inflation_rate, employment_rate)
+        break
+
+# Run simulations for a selected random person
+random_person = random.choice(list(simulation_data.values()))
+cumulative_savings = random_person['savings_account']
+cumulative_pension = random_person['pension_account']
+cumulative_current_account = random_person['current_account']
+years_with_bank = random_person['years_with_bank']
+
+final_age = age  # Track the last calculated age
+
+# Apply 1, 5, and 10 year increments
+for offset in age_offsets:
+    final_age += offset
+    if final_age > 105:
+        break
+
+    pension_rate, savings_rate = get_pension_savings_rate(final_age)
+
+    pension_contribution = random_person['income_after_tax'] * pension_rate
+    savings_contribution = random_person['income_after_tax'] * savings_rate
+
+    cumulative_pension += pension_contribution
+    cumulative_savings += savings_contribution
+    cumulative_current_account += random_person['income_after_tax'] - (pension_contribution + savings_contribution)
+
+    years_with_bank += offset
+
+    print(f"\nA customer of age {final_age}:")
+    print(f"Their pension will be £{cumulative_pension:.2f}.")
+    print(f"Their savings will be £{cumulative_savings:.2f}.")
+    print(f"Their current account balance is £{cumulative_current_account:.2f}.")
+    print(f"Years with bank: {years_with_bank}")
+
+# If under 66, keep adding 1 year until 66
+while final_age < 66:
+    final_age += 1
+    pension_rate, savings_rate = get_pension_savings_rate(final_age)
+
+    pension_contribution = random_person['income_after_tax'] * pension_rate
+    savings_contribution = random_person['income_after_tax'] * savings_rate
+
+    cumulative_pension += pension_contribution
+    cumulative_savings += savings_contribution
+    cumulative_current_account += random_person['income_after_tax'] - (pension_contribution + savings_contribution)
+
+    years_with_bank += 1
+
+    print(f"\nA customer of age {final_age}:")
+    print(f"Their pension will be £{cumulative_pension:.2f}.")
+    print(f"Their savings will be £{cumulative_savings:.2f}.")
+    print(f"Their current account balance is £{cumulative_current_account:.2f}.")
+    print(f"Years with bank: {years_with_bank}")
