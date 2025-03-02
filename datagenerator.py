@@ -94,7 +94,7 @@ for i in range(1000):  # Generate 1000 agents
     }
 
 with open(filename, "w") as file:
-    file.write("agentdict = ")
+    file.write("agent_dict = ")
     file.write(repr(agentdict))
 
 
