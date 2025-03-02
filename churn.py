@@ -9,9 +9,7 @@ from tensorflow.keras import layers
 
 filename = "client_data"
 client_data = importlib.import_module(filename)
-clientdict = client_data.agent_dict
-
-agent_dict = {0: {'age': 60, 'income_after_tax': 17861.4, 'years_with_bank': 45, 'savings_account': 257204.16, 'current_account': 11057.58, 'pension_account': 0.0, 'left_bank': 1}, 1: {'age': 54, 'income_after_tax': 19942.8, 'years_with_bank': 39, 'savings_account': 233330.76, 'current_account': -12933.96, 'pension_account': 940324.48, 'left_bank': 0}, 2: {'age': 72, 'income_after_tax': 17543.4, 'years_with_bank': 57, 'savings_account': 319991.62, 'current_account': 146665.55, 'pension_account': 0.0, 'left_bank': 0}, 3: {'age': 31, 'income_after_tax': 15480.0, 'years_with_bank': 16, 'savings_account': 59443.2, 'current_account': 31535.1, 'pension_account': 88713.2, 'left_bank': 0}, 4: {'age': 23, 'income_after_tax': 15772.8, 'years_with_bank': 8, 'savings_account': 25236.48, 'current_account': 34517.48, 'pension_account': 14991.22, 'left_bank': 0}, 5: {'age': 52, 'income_after_tax': 18956.4, 'years_with_bank': 37, 'savings_account': 210416.04, 'current_account': 83765.17, 'pension_account': 735642.04, 'left_bank': 0}}
+agent_dict = client_data.agent_dict
 
 age_offsets = [0, 1, 4, 5]  # Add +1, +4, +5 to the original age
 
