@@ -2,7 +2,7 @@
 # System Overview
 We decided to create a simulation model to determine the probability of a person leaving Lloyds Bank based on factors such as age,income, averaage savings, average pension value, years with the bank etc. We take one simulated customer and see how their behaviour and likeliness to leave the bank changes over time. We split the customers age ranges then gathered and recorded data on these factors in that age range. The user will input their age and the programme will calculate
 
-# macroeconomics
+# Macroeconomics
 Factors which we looked into that can effect the probability of a customer leaving Lloyds bank eg. interest rates, unemployment rate in their age bracket, economic growth. If interest rates are high it means customers get a greater return on their savings so they may have more of an incentive to stay with Lloyds bank if they have alot of savings. From our research we saw that those in older age categories (50+) had a higher percentage of savings compared to younger age categories. As for unemployment rates if they are high in certain age groups it increases the probability that an individual in tha age category might be unemployed making them more likely to leave Lloyds bank as they aren't saving as much.
 
 
