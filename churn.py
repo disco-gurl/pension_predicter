@@ -17,7 +17,7 @@ age_offsets = [1, 5, 10]  # Add +1, +4, +5 to the original age
 age_groups = [(16, 17, 85.95), (18, 21, 85.95), (22, 29, 96.05), 
               (30, 39, 97.42), (40, 49, 97.42), (50, 59, 97.47), (60, 90, 97.47)]
 
-simulated_person = {}
+simulated_person = []
 
 bank_interest_rate = 2.0
 competitor_interest_rate = 1.8
@@ -245,6 +245,13 @@ cumulative_savings = random_person['savings_account']
 cumulative_pension = random_person['pension_account']
 cumulative_current_account = random_person['current_account']
 years_with_bank = random_person['years_with_bank']
+simulated_person.append({
+    'age': final_age,
+    'income_after_tax': random_person['income_after_tax'],
+    'savings_account': cumulative_savings,
+    'pension_account': cumulative_pension,
+    'likelihood_to_leave': counter  # Fix spelling mistake (see issue 4)
+})
 
 final_age = age  # Track the last calculated age
 
@@ -272,8 +279,17 @@ for offset in age_offsets:
     print("The probablity of them leaving is ", number2 , "%.")
     percentage = round(number2 * 100, 2)
     
-    simulated_person.update({'age': final_age, 'income_after_tax': random_person['income_after_tax'], 'savings_account': cumulative_savings, 'pension_account': cumulative_pension, 'likehood_to_leave': percentage})
-    
+    simulated_person.append({
+        'age': final_age,
+        'income_after_tax': random_person['income_after_tax'],
+        'savings_account': cumulative_savings,
+        'pension_account': cumulative_pension,
+        'likelihood_to_leave': percentage
+    })
+
+    # Debugging output
+    print(f"Updated simulated_person (Iteration {len(simulated_person)}):", simulated_person[-1])
+
 
 # If last calculated age is still under 66, calculate for 66 years old too
 while final_age < 66:
@@ -297,6 +313,10 @@ if final_age == 66:
     customer = {'age': final_age, 'income_after_tax': random_person['income_after_tax'], 'years_with_bank': years_with_bank, 'savings_account': cumulative_savings, 'current_account': cumulative_current_account, 'pension_account': cumulative_pension}
     number2 = predictability(model, scaler, bank_interest_rate, competitor_interest_rate, inflation_rate, employment_rate, customer)
     print("The probablity of them leaving is ", number2 , "%.")
-    simulated_person.update({'age': final_age, 'income_after_tax': random_person['income_after_tax'], 'savings_account': cumulative_savings, 'pension_account': cumulative_pension, 'likehood_to_leave': percentage})
-    
-    
+    simulated_person.append({
+    'age': final_age,
+    'income_after_tax': random_person['income_after_tax'],
+    'savings_account': cumulative_savings,
+    'pension_account': cumulative_pension,
+    'likelihood_to_leave': percentage  # Fix spelling mistake (see issue 4)
+    })
