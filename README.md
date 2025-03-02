@@ -1,4 +1,4 @@
-# pension_predicter
+# Pension_Predictor
 # System Overview
 We decided to create a simulation model to determine the probability of a person within the pension business leaving Lloyds Bank based on factors such as age,income, average savings, average pension value, years with the bank etc. We create a diverse demographic of people within a given age and see how their behaviour and likeliness to leave the bank changes over time. In addition to this, we present a simulated customer and show their likeliness over a set period of time. We also display the trends based on the data set for data analysis purposes. We split the customers into set age ranges then gathered and recorded data on these factors in that age range. The user will input their age and using nueral networks we analyse other customers data within that age range from a created data set to determine the probability of them leaving the bank.
 
