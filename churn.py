@@ -103,25 +103,6 @@ def probabality(age_group_lower, age_group_upper, bank_interest_rate, competitor
     
     return model, scaler
 
-# Predict customer likelihood of leaving the bank
-def predictability(model, scaler, bank_interest_rate, competitor_interest_rate, inflation_rate, employment_rate, customer):
-    analysis_customer = pd.DataFrame({
-        "income_after_tax": [customer["income_after_tax"]],
-        "savings_account": [customer["savings_account"]],
-        "current_account": [customer["current_account"]],
-        "pension_account": [customer["pension_account"]],
-        "years_with_bank": [customer["years_with_bank"]],
-        "Inflation": [inflation_rate],
-        "Employment": [employment_rate],
-        "Bank Interest": [bank_interest_rate],
-        "Competitors Interest": [competitor_interest_rate] 
-    })
-
-    scaled_customer = scaler.transform(analysis_customer)
-    probability = model.predict(scaled_customer)
-    
-    return probability
-
 # Select the age group and run simulations
 age_groups = [(16, 17, 85.95), (18, 21, 85.95), (22, 29, 96.05), 
               (30, 39, 97.42), (40, 49, 97.42), (50, 59, 97.47), (60, 90, 97.47)]
@@ -137,33 +118,56 @@ for lower, upper, emp_rate in age_groups:
 random_person = random.choice(list(simulation_data.values()))
 cumulative_savings = random_person['savings_account']
 cumulative_pension = random_person['pension_account']
+cumulative_current_account = random_person['current_account']
+years_with_bank = random_person['years_with_bank']
+
 final_age = age  # Track the last calculated age
 
 for offset in age_offsets:
     final_age = age + offset
     if final_age > 105:
         break
-    #you removed this customer = {'age': current_age, 'income_after_tax': updated_income, 'years_with_bank': updated_years_in_bank, 'savings_account': updated_savings, 'current_account': updated_current_account, 'pension_account': updated_pension}
-        #number2 = predictability(model, scaler, bank_interest_rate, competitor_interest_rate, inflation_rate, employment_rate, customer)
-    updated_income = random_person['income_after_tax']
-    pension_rate, savings_rate = (0.35, 0.44) if final_age >= 60 else (0.30, 0.36) 
 
-    cumulative_pension += updated_income * pension_rate
-    cumulative_savings += updated_income * savings_rate
+    updated_income = random_person['income_after_tax']
+    pension_rate, savings_rate = (0.35, 0.44) if final_age >= 60 else (0.30, 0.36)
+
+    pension_contribution = updated_income * pension_rate
+    savings_contribution = updated_income * savings_rate
+
+    cumulative_pension += pension_contribution
+    cumulative_savings += savings_contribution
+
+    # Subtract pension & savings contributions from income and add remaining to current account
+    cumulative_current_account += updated_income - (pension_contribution + savings_contribution)
+
+    # Increase years with bank
+    years_with_bank += offset
 
     print(f"\nA customer of age {final_age}:")
     print(f"Their pension will be £{cumulative_pension:.2f}.")
     print(f"Their savings will be £{cumulative_savings:.2f}.")
+    print(f"Their current account balance is £{cumulative_current_account:.2f}.")
+    print(f"Years with bank: {years_with_bank}")
 
 # If last calculated age is still under 66, calculate for 66 years old too
 if final_age < 66:
     final_age = 66
-    pension_rate, savings_rate = 0.35, 0.44  # Use rates for 60+
-    cumulative_pension += updated_income * pension_rate
-    cumulative_savings += updated_income * savings_rate
+    pension_rate, savings_rate = 0.35, 0.44
+
+    pension_contribution = updated_income * pension_rate
+    savings_contribution = updated_income * savings_rate
+
+    cumulative_pension += pension_contribution
+    cumulative_savings += savings_contribution
+
+    cumulative_current_account += updated_income - (pension_contribution + savings_contribution)
+    years_with_bank += (66 - final_age)  # Adjust years with bank for remaining years to 66
 
     print(f"\nA customer of age {final_age}:")
     print(f"Their pension will be £{cumulative_pension:.2f}.")
     print(f"Their savings will be £{cumulative_savings:.2f}.")
+    print(f"Their current account balance is £{cumulative_current_account:.2f}.")
+    print(f"Years with bank: {years_with_bank}")
+
 
 
