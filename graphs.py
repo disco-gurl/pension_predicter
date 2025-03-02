@@ -48,7 +48,7 @@ percentage_left = {
 plt.figure(figsize=(8, 5))
 plt.bar(percentage_left.keys(), percentage_left.values(), color=['blue', 'green', 'red'])
 plt.xlabel("Age Groups")
-plt.ylabel("Percentage Left (%)")
+plt.ylabel("Percentage Left %")
 plt.title("Percentage of People Who Left the Bank by Age Group")
 plt.ylim(0, max(percentage_left.values()) + 5)  # Adjust y-axis
 plt.grid(axis='y', linestyle='--', alpha=0.7)
