@@ -6,3 +6,8 @@ tkinter
 matplotlib
 random
 numpy
+importlib
+pandas
+tensorflow
+tensorflow.keras 
+layers
