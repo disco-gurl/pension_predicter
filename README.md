@@ -19,7 +19,8 @@ glob,
 matplotlib.pyplot,
 
 # References
-GUI: https://bolt.new
+GUI: Cursor.com. (2023). Cursor - The AI Code Editor. [online] Available at: https://www.cursor.com/en.
+‌
 Age group data: 
 Navigating customer attrition: 7 reasons why do customers leave (2023) Wavetec.
 Available at: https://www.wavetec.com/blog/why-do-customers-leave/#:~:text=The%20main%20reason%20for%20losing,%3F%E2%80%9D%20succinctly%20encapsulates%20this%20challenge. (Accessed: 01 March 2025). 
