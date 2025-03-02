@@ -143,7 +143,8 @@ for offset in age_offsets:
     final_age = age + offset
     if final_age > 105:
         break
-
+    #you removed this customer = {'age': current_age, 'income_after_tax': updated_income, 'years_with_bank': updated_years_in_bank, 'savings_account': updated_savings, 'current_account': updated_current_account, 'pension_account': updated_pension}
+        #number2 = predictability(model, scaler, bank_interest_rate, competitor_interest_rate, inflation_rate, employment_rate, customer)
     updated_income = random_person['income_after_tax']
     pension_rate, savings_rate = (0.35, 0.44) if final_age >= 60 else (0.30, 0.36) 
 
